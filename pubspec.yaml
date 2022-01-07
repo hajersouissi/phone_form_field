@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
   circle_flags: ^0.0.2
   phone_numbers_parser: ^4.2.0
   dart_countries: ^2.1.0
@@ -17,7 +19,5 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-  flutter_localizations: # Add this line
     sdk: flutter
 
