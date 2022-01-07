@@ -16,6 +16,7 @@ import 'phone_field_localization_nl.dart';
 import 'phone_field_localization_pt.dart';
 import 'phone_field_localization_ru.dart';
 import 'phone_field_localization_sv.dart';
+import 'phone_field_localization_tr.dart';
 import 'phone_field_localization_zh.dart';
 
 /// Callers can lookup localized strings with an instance of PhoneFieldLocalization returned
@@ -96,24 +97,23 @@ abstract class PhoneFieldLocalization {
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
     delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
+    ...GlobalMaterialLocalizations.delegates,
   ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
+    Locale('de'),
     Locale('en'),
     Locale('es'),
     Locale('fr'),
-    Locale('ar'),
-    Locale('de'),
     Locale('hi'),
     Locale('it'),
     Locale('nl'),
     Locale('pt'),
     Locale('ru'),
     Locale('sv'),
+    Locale('tr'),
     Locale('zh')
   ];
 
@@ -1629,6 +1629,7 @@ class _PhoneFieldLocalizationDelegate
         'pt',
         'ru',
         'sv',
+        'tr',
         'zh'
       ].contains(locale.languageCode);
 
@@ -1661,6 +1662,8 @@ PhoneFieldLocalization lookupPhoneFieldLocalization(Locale locale) {
       return PhoneFieldLocalizationRu();
     case 'sv':
       return PhoneFieldLocalizationSv();
+    case 'tr':
+      return PhoneFieldLocalizationTr();
     case 'zh':
       return PhoneFieldLocalizationZh();
   }
