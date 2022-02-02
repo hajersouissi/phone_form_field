@@ -36,6 +36,7 @@ class CountryList extends StatelessWidget {
         : countries.length;
 
     return ListView.builder(
+      key: const ValueKey('country-list-view'),
       controller: scrollController,
       shrinkWrap: true,
       itemCount: listLength,

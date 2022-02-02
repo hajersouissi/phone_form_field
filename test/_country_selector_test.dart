@@ -3,9 +3,25 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:phone_form_field/src/widgets/country_picker/search_box.dart';
+import 'utils.dart';
 
 void main() {
   group('CountrySelector', () {
+    testWidgets('Should return the selected country', (tester) async {
+      Country? selected;
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: CountrySelector(onCountrySelected: (c) => selected = c),
+        ),
+      ));
+      await tester.pumpAndSettle();
+      final usTile = find.byKey(const ValueKey('US'));
+      await tester.ensureVisibleByScrolling(usTile,
+          scrollFrom: Offset(400, 400));
+      expect(usTile, findsOneWidget);
+      await tester.tap(usTile);
+      expect(selected?.isoCode, 'US');
+    });
     group('Without internationalization', () {
       final app = MaterialApp(
         home: Scaffold(
@@ -101,7 +117,10 @@ void main() {
         await tester.pumpAndSettle(Duration(seconds: 1));
         final allTiles = find.byType(ListTile);
         expect(allTiles, findsWidgets);
-        // expect(tester.widget<ListTile>(allTiles.first).key, equals(Key('AF')));
+        final firstTile = tester.widget<ListTile>(allTiles.first);
+        final key = firstTile.key as ValueKey<String>;
+
+        expect(key.value.startsWith('A'), isTrue);
       });
 
       testWidgets('should be properly sorted with favorites', (tester) async {
